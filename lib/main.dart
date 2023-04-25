@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'views/pages/cart/firstclass.dart';
+import 'views/pages/examples/proxy_provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,11 +11,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowMaterialGrid: false,
       debugShowCheckedModeBanner: false,
       title: 'learn provider',
-      home: FirstClass(),
+      home: Proxy(),
     );
   }
 }
