@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-//? first class inherited from CN
+//? first class Model inherited from CN
+//* first one use => with not extends .....
+
 class FirstModel with ChangeNotifier {
   String name = "wael";
   void changeName(String val) {
@@ -15,6 +17,8 @@ class SecondModel {
   FirstModel mymodel;
   SecondModel(this.mymodel);
 
+  //? we can use any thing on first midel here as
+  
   //* we make new function that use function from first model
 
   void changeNameElse() {

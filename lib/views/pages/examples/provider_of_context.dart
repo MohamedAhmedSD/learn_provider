@@ -1,5 +1,5 @@
 //! use changenotifier && provider.of(context)
-//? it rebuild the entire widget
+//? it rebuild the entire widget && rebuild multi times for strings ============
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +35,12 @@ class _TestTwoState extends State<TestTwo> {
   }
 }
 
-//! 3. we need build widget to call context inside it, then call widgey under main one
+//?===============================================================================
+//! 3. we need build widget to call context inside it, then call widget under main one
+//* so it should be under buildcontext of widget .............................
+//* you can assign it into variable and use its value to call model contents
+//! no need to wrap widget tree as Consumer or selector
+//?===============================================================================
 
 class WidgetChild extends StatelessWidget {
   const WidgetChild({super.key});
@@ -45,7 +50,8 @@ class WidgetChild extends StatelessWidget {
     //! 4. add it here
     //* if you not determain <T>
     //? The following assertion was thrown building WidgetChild(dirty):
-    var model = Provider.of<Model>(context);
+    // var model = Provider.of<Model>(context,listen: false); //! not rebuild UI
+    var model = Provider.of<Model>(context, listen: true); //! rebuild UI
     return Column(
       children: [
         Center(

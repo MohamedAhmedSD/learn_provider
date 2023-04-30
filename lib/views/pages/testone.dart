@@ -48,7 +48,6 @@
 // }
 
 //! use changenotifier && consumer
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -69,16 +68,18 @@ class _TestOneState extends State<TestOne> {
     return ChangeNotifierProvider(
       //* its scope here child
       //* only here child == under it tree, can use consumer,selector....
+      //? CREATE it take function, and function need return, it return our Model
       create: (BuildContext context) => Model(),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Providers"),
+          title: const Text("Provider Course"),
         ),
         //! 3. consumer <listen to who or not work>:
         //* it need builder with three => ctx, our model, child
         //* access data from your model
         body: Consumer<Model>(
           builder: (context, model, child) => Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Center(
                 child: Text(model.name),
@@ -102,7 +103,25 @@ class _TestOneState extends State<TestOne> {
   }
 }
 
+//?===============    [ Model ] ===================
 //! 1. we build model contain both variable && function to use them
+//* we can reach both of them through model, and we can change variable value by
+//* function use it inside it
+
+//* seprate your logic from view
+//? what difference between with && extends here?
+/*
+Regarding the syntax difference between "class Test extends ChangeNotifier{}"
+ and "class Test with ChangeNotifier{}", 
+ the former is used to create a class that inherits from ("extends")
+ the ChangeNotifier class, 
+ while the latter is used to add the behavior of ("with") 
+ the ChangeNotifier class to the Test class.
+ In other words, the first one creates a new class that is 
+ a subtype of ChangeNotifier,
+ while the second one adds ChangeNotifier as a mixin to the Test class.
+ */
+
 class Model extends ChangeNotifier {
   String name = "Welcome";
 
@@ -113,6 +132,8 @@ class Model extends ChangeNotifier {
     }
     //! you need add notifyListeners();
     //* without it only update consle without Ui
-    notifyListeners(); //! it rebuild consumer from type model only
+    notifyListeners();
+    //! so when called by consumer or others it rebuild
+    //* that used same model name
   }
 }

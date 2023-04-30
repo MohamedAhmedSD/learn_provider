@@ -21,17 +21,20 @@ class SelectorLearn extends StatelessWidget {
       create: (BuildContext context) => SelectorLearnModel(),
       child: Scaffold(
         body: ListView(
+          //? ================ [ selector] ============
           //! 3. write Selector
           children: [
             //* Selector<model, dataType of its variables> ( selector & builder)
             Selector<SelectorLearnModel, String>(
                 //? Function(BuildContext, SelectorLearnModel) selector}
                 //? selectorLearnModel optional orders,
-                //* through it we can reach to model content
+                //* through it we can reach to model content datatype
                 //* use it to bring => s1
-                selector: (contect, myAccessToModel) => myAccessToModel.s1,
+                selector: (context, myAccessToModel) => myAccessToModel.s1,
                 //? myAccessToModel == model , no need to access as consumer
                 //* valueOfmyAccessToModel == myAccessToModel.s1
+                //! like you just choose only one value per a time
+
                 builder: (context, valueOfmyAccessToModel, child) {
                   if (kDebugMode) {
                     print("String update");
@@ -47,6 +50,7 @@ class SelectorLearn extends StatelessWidget {
                 return Text('$value');
               },
             ),
+            //? ================ [ consumer] ============
             Consumer<SelectorLearnModel>(
               builder: (context, value, child) => TextButton(
                   onPressed: () {
@@ -69,21 +73,34 @@ class SelectorLearn extends StatelessWidget {
 }
 
 class SelectorLearnModel extends ChangeNotifier {
+  /// This is a class definition for `SelectorLearnModel` that `extends`
+  /// the `ChangeNotifier` class.
+  /// It contains two instance variables `show1` and `show2` that are
+  /// initialized with the values `"show"` and `1`, respectively.
   var show1 = "show";
   var show2 = 1;
 
   //! 1. to use selectorwe need make getter, get newVar => classVar;
+  //* To use selectors in this class, the author has created two getters
+  //* `s1` and `s2` which simply return the values of `show1` and `show2`, respectively.
+
   get s1 => show1;
   get s2 => show2;
 
+  /// `doSomething` updates the value of `show1` to the string `
+  ///! "selector of String build only one time"
+
   doSomething() {
     show1 = "selector of String build only one time ";
+
+    /// notifies any listeners that the data has changed by calling `notifyListeners()`.
     notifyListeners();
   }
-  //! selector rebild one time only if now data change not rebild
+
   //* so show String => rebuild only one time
   //* show2 int when ++ => it rebuild every time, when call function
 
+  //* which is an int will rebuild every time
   doSomething2() {
     show2++;
     notifyListeners();

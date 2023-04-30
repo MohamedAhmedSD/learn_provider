@@ -5,10 +5,11 @@ import 'package:provider/provider.dart';
 class ProvOne extends StatelessWidget {
   const ProvOne({super.key});
 
-//! when use consumer from certain type we rebuild all others
+//! when use consumer from certain Model we rebuild all other consumers with same model
 //! even there are a change on them our not
 //? it update Ui on certain places with rebuild all places
-//* that bad things
+//? also it rebuild String more than one time -----------
+//* that bad things ================================================
 
   @override
   Widget build(BuildContext context) {
@@ -67,6 +68,7 @@ class ProvOne extends StatelessWidget {
   }
 }
 
+//* any change change 4 places =.> strings + btns
 class ProvOneModel extends ChangeNotifier {
   var show1 = "show";
   var show2 = "show2";

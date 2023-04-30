@@ -1,6 +1,6 @@
-
 //! _Provider when no need update or UI, its use ordinary model,
-//! no need to extends or use notifirelistener
+//? no need to extends or use notifirelistener
+//* it rebuild many times when call it
 
 // ignore_for_file: file_names
 
@@ -30,23 +30,19 @@ class _TestFourState extends State<TestFour> {
         appBar: AppBar(
           title: const Text("Provider not update UI != as CNP )"),
         ),
-        //! 5. call widget that inherit
-
-        //* access data from your model
         body: const WidgetChild(),
       ),
     );
   }
 }
 
-//! 3. we need build widget to call context inside it, then call widgey under main one
-
 class WidgetChild extends StatelessWidget {
   const WidgetChild({super.key});
-
+//? ======= it can use Consumer and others ===========
   @override
   Widget build(BuildContext context) {
     //! 4. use Consumer
+    //* access data from your model
 
     return Consumer<Model>(
       builder: (BuildContext context, m, Widget? child) => Column(
@@ -71,8 +67,11 @@ class WidgetChild extends StatelessWidget {
   }
 }
 
+//? =====================================================================
 //! 1. we build ordinary model [not extends] without =>  notifyListeners();
 //* not update Ui so no need to notifyListeners();
+//? =====================================================================
+
 class Model {
   String name = "Welcome";
 

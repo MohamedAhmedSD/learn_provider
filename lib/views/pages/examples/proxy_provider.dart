@@ -9,6 +9,8 @@ class Proxy extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //* better use them under Multiproviders.........
+
     return MultiProvider(
       providers: [
         //* FirstModel use CNP
@@ -21,16 +23,18 @@ class Proxy extends StatelessWidget {
           return SecondModel(mymodel);
         }),
       ],
-      child: MaterialApp(
-        title: "Smart Home",
-        home: Scaffold(
-          body: Column(
+      child: Scaffold(
+        body: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 50),
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Consumer<FirstModel>(
                 builder: (context, value, child) => Container(
-                    margin: const EdgeInsets.all(10), child: Text(value.name)),
+                  margin: const EdgeInsets.all(10),
+                  child: Text(value.name),
+                ),
               ),
               Consumer<FirstModel>(
                 builder: (context, value, child) => TextButton(

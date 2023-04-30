@@ -1,6 +1,7 @@
 //! use changenotifier &&context.read<model>().instance??
-//? watch => it call data & rebuild it == listen : true
-//? watch => it call data & not rebuild it == listen : false
+//? watch => it call data & rebuild its UI == listen : true
+//? read => it call data & not rebuild its UI == listen : false
+//* it rebuild many times
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +28,6 @@ class _TestThreeState extends State<TestThree> {
         appBar: AppBar(
           title: const Text("context =>read || watch"),
         ),
-        //! 5. call widget that inherit provider.of(context)
 
         //* access data from your model
         body: const WidgetChild(),
@@ -36,21 +36,18 @@ class _TestThreeState extends State<TestThree> {
   }
 }
 
-//! 3. we need build widget to call context inside it, then call widgey under main one
-
 class WidgetChild extends StatelessWidget {
   const WidgetChild({super.key});
 
   @override
   Widget build(BuildContext context) {
-    //! 4. add it here
-    //* if you not determain <T>
-    //? The following assertion was thrown building WidgetChild(dirty):
+    //* they should be under buildcontect and call in place we need them immediatlly
+    //* no need make variable of them
+
     return Column(
       children: [
         Center(
-          //* if not write .to access instance data it back
-          //? instanse of your model
+          //* if not write .to access instance data, it back => instanse of your model
           child: Text(context.watch<Model>().name),
         ),
         const SizedBox(
