@@ -14,6 +14,8 @@ class _CheckOutState extends State<CheckOut> {
   @override
   Widget build(BuildContext context) {
     // var myCart = Provider.of<Cart>(context);
+    //? =========== it use the final list that on our model to display here
+    //* so firstclass to add items , and checkout to diaplay them ========
 
     return Scaffold(
       appBar: AppBar(

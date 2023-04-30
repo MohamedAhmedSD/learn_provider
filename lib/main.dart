@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
+    return MaterialApp(
       debugShowMaterialGrid: false,
       debugShowCheckedModeBanner: false,
       title: 'learn provider',
